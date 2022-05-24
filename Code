@@ -1,0 +1,58 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+#include <ctype.h>
+#include <cstring>
+#include <string>
+
+class camel 
+{
+  public:
+  string type;
+  string color;
+ };
+
+class dice
+{
+  public:
+  string type;
+  string color;
+  int number;
+}
+
+int randice ()
+{
+  int n;
+  n = 1;
+
+int main()
+{
+  camel camTok1;
+  camTok1.type = "Regular";
+  camTok1.color = "Blue";
+  
+  camel camTok2;
+  camTok2.type = "Regular";
+  camTok2.color = "Yellow";
+  
+  camel camTok3;
+  camTok3.type = "Regular";
+  camTok3.color = "Green";
+  
+  camel camTok4;
+  camTok4.type = "Regular";
+  camTok4.color = "Orange";
+  
+  camel camTok5;
+  camTok5.type = "Regular";
+  camTok5.color = "Purple";
+  
+  camel camTok6;
+  camTok6.type = "Crazy";
+  camTok6.color = "Black";
+  
+  camel camTok7;
+  camTok7.type = "Crazy";
+  camTok7.color = "White";
+  
+  cout << "Welcome to Camel Up!\n A game where camel racing betting is encouraged!\n ";
