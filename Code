@@ -4,21 +4,66 @@ using namespace std;
 #include <cstring>
 #include <string>
 
-class dice
+class camel
 {
-  public:
+public:
   string type;
   string color;
-  int number;
 };
 
-/*int randice ()
+int token()
 {
-  int n;
-  n = 1;
-}*/
-int main()
-{
-  cout << "Welcome to Camel Up!\n A game where camel racing betting is encouraged!\n ";
-  return 0;
+    int c;
+    srand(time(0));
+    for(int t=0;t<1;t++)
+    {
+        c = (rand() % 7) + 1;
+    }
+    while(c<8)
+    {
+    if (c==1)
+    {
+        camel camTok1;
+        camTok1.type = "Regular";
+        camTok1.color = "Blue";
+    }
+    else if (c==2)
+    {
+        camel camTok2;
+        camTok2.type = "Regular";
+        camTok2.color = "Yellow";
+    }
+    else if (c==3)
+    {
+        camel camTok3;
+        camTok3.type = "Regular";
+        camTok3.color = "Green";
+    }
+    else if (c==4)
+    {
+        camel camTok4;
+        camTok4.type = "Regular";
+        camTok4.color = "Orange";
+    }
+    else if (c==5)
+    {
+        camel camTok5;
+        camTok5.type = "Regular";
+        camTok5.color = "Purple";
+    }
+    else if (c==6)
+    {
+        camel camTok6;
+        camTok6.type = "Crazy";
+        camTok6.color = "Black";
+    }
+    else if (c==7)
+    {
+        camel camTok7;
+        camTok7.type = "Crazy";
+        camTok7.color = "White";
+    }
+    break;
+}
+  return c;
 }
