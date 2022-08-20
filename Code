@@ -20,6 +20,7 @@ class dice
 }*/
 int main()
 {
-  cout << "Welcome to Camel Up!\n A game where camel racing betting is encouraged!\n ";
+  cout << "Welcome to Camel Up!\nA game where camel racing betting is encouraged!\n";
+  token();
   return 0;
 }
