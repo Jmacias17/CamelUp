@@ -4,7 +4,7 @@ using namespace std;
 #include <cstring>
 #include <string>
 
-char choice()
+char actions()
 {
     char choice;
     cout << "----------------------------------------------------------------------\n";
