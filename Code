@@ -4,23 +4,17 @@ using namespace std;
 #include <cstring>
 #include <string>
 #include "CamelT"
+#include "Actions"
 
-class dice
-{
-  public:
-  string type;
-  string color;
-  int number;
-};
-
-/*int randice ()
-{
-  int n;
-  n = 1;
-}*/
 int main()
 {
-  cout << "Welcome to Camel Up!\nA game where camel racing betting is encouraged!\n";
-  token();
+    char c;
+    cout << "Welcome to Camel Up!\nA game where camel racing betting is encouraged!\n";
+    c = choice();
+    if (c == 'B')
+    {
+        token();
+    }  
+  
   return 0;
 }
