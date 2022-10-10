@@ -3,24 +3,29 @@ using namespace std;
 #include <ctype.h>
 #include <cstring>
 #include <string>
-#include "CamelT"
 
-class dice
+char choice()
 {
-  public:
-  string type;
-  string color;
-  int number;
-};
-
-/*int randice ()
-{
-  int n;
-  n = 1;
-}*/
-int main()
-{
-  cout << "Welcome to Camel Up!\nA game where camel racing betting is encouraged!\n";
-  token();
-  return 0;
+    char choice;
+    cout << "----------------------------------------------------------------------\n";
+    cout << "|A. Take top betting card                                            |\n";
+    cout << "|B. Place spectator tile on track                                    |\n";
+    cout << "|C. Take 1 pyramid ticket and throw dice                             |\n";
+    cout << "|D. Bet on overall winner or loser                                   |\n";
+    cout << "----------------------------------------------------------------------\n";
+  
+    cin >> choice;
+    choice = toupper(choice);
+    
+    while (choice != 'A', 'B','C','D')
+    {
+      if ((choice >= 'A') && (choice <= 'D'))
+      {
+        return choice;
+      }
+      else
+      {
+        cout << "Not a valid action.\nTry again\n";
+      }
+    }
 }
