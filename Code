@@ -10,7 +10,7 @@ int main()
 {
     char c;
     cout << "Welcome to Camel Up!\nA game where camel racing betting is encouraged!\n";
-    c = choice();
+    c = actions();
     if (c == 'B')
     {
         token();
