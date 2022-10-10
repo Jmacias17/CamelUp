@@ -19,13 +19,15 @@ char actions()
     
     while (choice != 'A', 'B','C','D')
     {
-      if ((choice >= 'A') && (choice <= 'D'))
-      {
+    if ((choice >= 'A') && (choice <= 'D'))
+    {
         return choice;
-      }
-      else
-      {
+    }
+    else
+    {
         cout << "Not a valid action.\nTry again\n";
-      }
+        cin >> choice;
+        choice = toupper(choice);
+    }
     }
 }
