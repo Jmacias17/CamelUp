@@ -18,23 +18,28 @@ int main()
     ticket(0);
     
     cout<<"\n";
-    
-    c = actions();
-    switch (c)
+    int h = 1;
+    while (h <= 5)
     {
-        case 'A':
-            cout << "Action under development\n";
-            break;
-        case 'B':
-            cout << "Action under development\n";
-            break;
-        case 'C':
-            ticket(1);
-            token();
-            break;
-        case 'D':
-            cout << "Action under development\n";
-            break;
+        c = actions();
+        switch (c)
+        {
+            case 'A':
+                cout << "Action under development\n";
+                break;
+            case 'B':
+                cout << "Action under development\n";
+                break;
+            case 'C':
+                ticket(h);
+                token();
+                break;
+            case 'D':
+                cout << "Action under development\n";
+                break;
+        }
+        
+        h++;
     }
   
   return 0;
