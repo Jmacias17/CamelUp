@@ -5,11 +5,20 @@ using namespace std;
 #include <string>
 #include "CamelT"
 #include "Actions"
+#include "Setup"
+#include "PTkt"
 
 int main()
 {
     char c;
-    cout << "Welcome to Camel Up!\nA game where camel racing betting is encouraged!\n";
+    cout << " Welcome to Camel Up!\n A game where camel racing betting is encouraged!\n";
+    cout <<"\n";
+    
+    start();
+    ticket(0);
+    
+    cout<<"\n";
+    
     c = actions();
     switch (c)
     {
@@ -17,10 +26,11 @@ int main()
             cout << "Action under development\n";
             break;
         case 'B':
-            token();
+            cout << "Action under development\n";
             break;
         case 'C':
-            cout << "Action under development\n";
+            ticket(1);
+            token();
             break;
         case 'D':
             cout << "Action under development\n";
