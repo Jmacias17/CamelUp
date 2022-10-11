@@ -3,39 +3,14 @@ using namespace std;
 #include <ctype.h>
 #include <cstring>
 #include <string>
-#include "CamelT"
-#include "Actions"
-#include "Setup"
-#include "PTkt"
 
-int main()
+int ticket(int x)
 {
-    char c;
-    cout << " Welcome to Camel Up!\n A game where camel racing betting is encouraged!\n";
-    cout <<"\n";
+    int pt;
     
-    start();
-    ticket(0);
+    pt = 5 - x;
     
-    cout<<"\n";
+    cout << " Pyramid Tickets left:" << pt << "\n";
     
-    c = actions();
-    switch (c)
-    {
-        case 'A':
-            cout << "Action under development\n";
-            break;
-        case 'B':
-            cout << "Action under development\n";
-            break;
-        case 'C':
-            ticket(1);
-            token();
-            break;
-        case 'D':
-            cout << "Action under development\n";
-            break;
-    }
-  
-  return 0;
+    return pt;
 }
