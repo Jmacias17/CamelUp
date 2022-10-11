@@ -4,96 +4,29 @@ using namespace std;
 #include <cstring>
 #include <string>
 
-class camel
-{
-public:
-  string type;
-  string color;
-};
 
-int token()
+int start()
 {
-    int c, n;
-
+    int b, y, g, oj, p, bk, wh;
+    
     srand(time(0));
     
-    for(int t=0;t<1;t++)
-    {
-        c = (rand() % 7) + 1;
-        n = (rand() % 3) + 1;
-        
-        switch (c)
-        {    
-            case 1:
-            {
-                camel T1;
-                T1.type = " Regular";
-                T1.color = " Blue";
-                cout<<T1.type<<"\n"<<T1.color<<"\n";
-                cout<< " " << n <<"\n";
-                break;
-            }
-        
-            case 2:
-            {
-                camel T2;
-                T2.type = " Regular";
-                T2.color = " Yellow";
-                cout<<T2.type<<"\n"<<T2.color<<"\n";
-                cout<< " " << n <<"\n";
-                break;
-            }
-        
-            case 3:
-            {
-                camel T3;
-                T3.type = " Regular";
-                T3.color = " Green";
-                cout<<T3.type<<"\n"<<T3.color<<"\n";
-                cout<< " " << n <<"\n";
-                break;
-            }
-        
-            case 4:
-            {
-                camel T4;
-                T4.type = " Regular";
-                T4.color = " Orange";
-                cout<<T4.type<<"\n"<<T4.color<<"\n";
-                cout<< " " << n <<"\n";
-                break;
-            }
-        
-            case 5:
-            {
-                camel T5;
-                T5.type = " Regular";
-                T5.color = " Purple";
-                cout<<T5.type<<"\n"<<T5.color<<"\n";
-                cout<< " " << n <<"\n";
-                break;
-            }
-        
-            case 6:
-            {
-                camel T6;
-                T6.type = " Crazy";
-                T6.color = " Black";
-                cout<<T6.type<<"\n"<<T6.color<<"\n";
-                cout<< " " << n <<"\n";
-                break;
-            }
-        
-            case 7:
-            {
-                camel T7;
-                T7.type = " Crazy";
-                T7.color = " White";
-                cout<<T7.type<<"\n"<<T7.color<<"\n";
-                cout<< " " << n <<"\n";
-                break;
-            }
-        }
-    }
-  return n;
+    b = 0 + ((rand() % 3) + 1);
+    y = 0 + ((rand() % 3) + 1);
+    g = 0 + ((rand() % 3) + 1);
+    oj = 0 + ((rand() % 3) + 1);
+    p = 0 + ((rand() % 3) + 1);
+    
+    bk = 16 - ((rand() % 3) + 1);
+    wh = 16 - ((rand() % 3) + 1);
+    
+    cout << " Blue is at " << b << "\n";
+    cout << " Yellow is at " << y << "\n";
+    cout << " Green is at " << g << "\n";
+    cout << " Orange is at " << oj << "\n";
+    cout << " Purple is at " << p << "\n";
+    cout << " Black is at " << bk << "\n";
+    cout << " White is at " << wh << "\n";
+   
+    return b, y, g, oj, p, bk, wh;
 }
