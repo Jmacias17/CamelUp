@@ -11,10 +11,21 @@ int main()
     char c;
     cout << "Welcome to Camel Up!\nA game where camel racing betting is encouraged!\n";
     c = actions();
-    if (c == 'B')
+    switch (c)
     {
-        token();
-    }  
+        case 'A':
+            cout << "Action under development\n";
+            break;
+        case 'B':
+            token();
+            break;
+        case 'C':
+            cout << "Action under development\n";
+            break;
+        case 'D':
+            cout << "Action under development\n";
+            break;
+    }
   
   return 0;
 }
