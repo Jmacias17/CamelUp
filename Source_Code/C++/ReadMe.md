@@ -1,0 +1,1 @@
+This Folder is for the standalone files used in CamelUp, these aren't final and still need some work done but everything works from setup, to keep track of bottom to top camels, keep track of winner, keep track of positions, keep track of moved camels, turns, pyramid tokens and more..
