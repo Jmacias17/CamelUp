@@ -1,18 +1,10 @@
 #include "Game.h"
 
-// This Function is used to Display the Unit Of Camels from Bottom -> Top
-void Game::displayUnit(int tile) {
-  // Get current Tile
-  Tile *currTile = this->getTile(tile);
-
-  // Get bottomCamel of Tile as checkCamel.
-  int checkCamel = currTile->getCamelNum();
-
-  // If empty then checkCamel is -1 so return
-  if (checkCamel == -1) {
-    cout << "\n";
-    return;
-  }
+/*  Display Functions */
+// This Function is used to print the correct order of the Unit Of Camels
+void Game::printStack(int bottomCamelNum) {
+  // Get Location of Unit
+  int loc = 0;
 
   // Local Variable to look through Camels
   Camel *currCamel;
@@ -20,26 +12,53 @@ void Game::displayUnit(int tile) {
   // Check from bottom to top camels while parent isn't empty.
   do {
     // Set currCamel to the checkCamel Number.
-    currCamel = this->getCamel(checkCamel);
+    currCamel = this->getCamel(bottomCamelNum);
 
     // if currCamel doesn't have a parent which parent == -1 then print single
     if (currCamel->getParent() == -1) {
       // Print Single Camel.
-      cout << "[" << currCamel->getType() << "] " << currCamel->getColor()
-           << "{" << currCamel->getPosition() << "}"
-           << "\n";
+      cout << "[" << currCamel->getType() << "] " << currCamel->getColor();
+      if (loc == 0)
+        cout << " {Bottom} \n";
+      else
+        cout << " {Top} \n";
       return;
     }
 
     // Else print Camel with arrow to next above camel which is parent camel.
-    cout << "[" << currCamel->getType() << "] " << currCamel->getColor() << "{"
-         << currCamel->getPosition() << "}"
-         << "-> ";
+    cout << "[" << currCamel->getType() << "] " << currCamel->getColor()
+         << " {";
+    if (loc == 0)
+      cout << "Bottom} -> ";
+    else
+      cout << loc << "}"
+           << " -> ";
 
     // Assign CheckCamel Number the next Parent of the CurrCamel.
-    checkCamel = currCamel->getParent();
+    bottomCamelNum = currCamel->getParent();
+
+    // Move loc in unit up by 1
+    loc++;
 
   } while (currCamel->getParent() != -1);
+}
+
+// This Function is used to Display the Unit Of Camels from Bottom -> Top
+void Game::displayUnit(int tile) {
+
+  // Get current Tile
+  Tile *currTile = this->getTile(tile);
+
+  // Get bottomCamel of Tile as checkCamel.
+  int bottomCamelNum = currTile->getCamelNum();
+
+  // If empty then checkCamel is -1 so return
+  if (bottomCamelNum == -1) {
+    cout << "\n";
+    return;
+  }
+
+  this->printStack(bottomCamelNum);
 }
 
 // This Function is used to Display the Board
@@ -56,15 +75,30 @@ void Game::displayBoard() {
   cout << "\n";
 }
 
-// This Function is used to start the Game by setting inital positions for
-// camels.
+// This Function is used to Display the result of the Pyramid Action.
+void Game::displayPyramidAction(Camel currCamel, int move) {
+  // Show The Affected Camel By Token
+  cout << "Pyramid Token: Move [" << currCamel.getType() << "] "
+       << currCamel.getColor() << " located at {" << currCamel.getPosition()
+       << "} and ALL above camels "
+       << "by " << move << " Spaces\n";
+}
+
+// This Function is used to Display the winner of the Game.
+void Game::displayWinner(Camel currCamel) {
+  cout << "------------------------------------------------------------------"
+          "----\n";
+  cout << "|\t\t\t\t\tWINNER: [" << currCamel.getType() << "] "
+       << currCamel.getColor() << " located at {" << currCamel.getPosition()
+       << "}            |\n";
+  cout << "------------------------------------------------------------------"
+          "----\n";
+  exit(0);
+}
+
+/* Setup Functions */
+// This Function is used to start the Game by running all methods for setup.
 void Game::start() {
-  srand(time(0));
-
-  // Local Variables
-  Camel *currCamel;
-  Tile *currTile;
-
   // Setup Camels
   this->setCamels();
 
@@ -77,9 +111,24 @@ void Game::start() {
   // Set Winner
   this->setWinnerNum(-1);
 
-  // Go through all Camels.
+  this->setStartingSpots();
+}
+
+// This Function is used to set the Starting Spots of the Camels on the Board.
+void Game::setStartingSpots() {
+  srand(time(0));
+
+  // Local Method Variables
+  Camel *currCamel;
+  Tile *currTile;
+
+  // Go through all Camels to set the starting position of a random value based
+  // on the type of camel.
   for (int i = 0; i < this->camelCount; i++) {
+    // Local For Loop Variable
     int position;
+
+    // Get the current Camel using the index of i.
     currCamel = this->getCamel(i);
 
     // If Position for Regular Camels Else Crazy Camels.
@@ -88,28 +137,38 @@ void Game::start() {
     else
       position = 16 - ((rand() % 3) + 1);
 
-    // Set Starting Position for Camel.
+    // Set Starting Position for the current Camel represented by index i.
     currCamel->setPosition(position);
 
-    // If Board already has a Bottom Camel find the Top Camel
+    // Get the Tile of the current position.
     currTile = this->getTile(position);
 
+    // Check if the Tile has a Camel located on it.
+    // If (camel != -1) then there is a Camel Unit located on Tile.
+    // Retrieve the Top Camel in order to place current Camel in the correct
+    // spot of Stack. Else if there is no bottom camel then the current Camel is
+    // the new Bottom Camel and ONLY Camel on Tile.
     if (currTile->getCamelNum() != -1) {
       // Get the Top Camel of the Unit
       int topCamelNum = this->getTopCamel(position);
 
-      // Set New Top Camel of Unit
+      // Set the exisiting Top Camel to have the Current Camel as the parent,
+      // which makes the Current Camel the new Top Camel.
       this->getCamel(topCamelNum)->setParent(i);
 
-      // Set Old Top Camel as Child of New Top Camel
+      // Set the existing Top Camel as the child of the new Top Camel which is
+      // the Current Camel
       currCamel->setChild(topCamelNum);
     } else {
+      // No Camels located on Tile, so get Tile of the current position and set
+      // the Bottom Camel as the Current Camel
       currTile = this->getTile(position);
       currTile->setCamelNum(i);
     }
   }
 }
 
+/* Game Action Functions */
 // This Function is used to get the Action of the user.
 char Game::getAction() {
   // Local Variables
@@ -123,11 +182,12 @@ char Game::getAction() {
   choice = toupper(choice);
 
   // While choice isn't required selection ask for valid selection.
-  while (choice != 'A', 'B', 'C', 'D') {
+  while (choice != 'A' || choice != 'B' || choice != 'C' || choice != 'D') {
     // If choice is a valid selection then return choice.
     if ((choice >= 'A') && (choice <= 'D')) {
       return choice;
     } else {
+      // Retry for choice until valid action.
       cout << "Not a valid action.\nTry again\n";
       cin >> choice;
       choice = toupper(choice);
@@ -135,7 +195,7 @@ char Game::getAction() {
   }
 
   // In event of error
-  return;
+  return 'E';
 }
 
 // This Function is used to set the new position of the camel based on pyramid
@@ -150,12 +210,41 @@ void Game::setToken() {
 
   // Get Random camelNum and Move as long as Camel hasn't been moved already.
   do {
-    camelNum = (rand() % 6) + 0;
+    camelNum = (rand() % 7) + 0;
     move = (rand() % 3) + 1;
   } while (this->getCamel(camelNum)->getIsMoved());
 
   // Get the Camel representing of the token.
   currCamel = this->getCamel(camelNum);
+
+  // Get the Position of the current Camel
+  currPos = currCamel->getPosition();
+
+  // Change Children of Stack
+  this->removeCamelOnTile(camelNum, currPos);
+
+  // If the Type is Crazy then the move will be in reverse so negative.
+  if (currCamel->getType() == "Crazy")
+    move = -1 * move;
+
+  this->displayPyramidAction(*currCamel, move);
+  this->setUnitLinks(camelNum, move);
+
+  if (currCamel->getPosition() > 14) {
+    this->setWinnerNum(camelNum);
+    this->displayBoard();
+    this->displayWinner(*currCamel);
+  }
+}
+
+// This Function is used to removed the links of the Camel from the Tile after
+// it moves.
+void Game::removeCamelOnTile(int bottomCamelNum, int currPos) {
+  Camel *currCamel;
+  Tile *currTile;
+
+  // Get the Camel representing of the token.
+  currCamel = this->getCamel(bottomCamelNum);
 
   // Get the Position of the current Camel
   currPos = currCamel->getPosition();
@@ -166,20 +255,21 @@ void Game::setToken() {
     // Get board tile and set empty by -1 to Tile.
     currTile = this->getTile(currPos);
     currTile->setCamelNum(-1);
+
+    // Get Child Camel of the Current Camel and removed the parent link.
   } else {
     int child = currCamel->getChild();
     Camel *childCamel = this->getCamel(child);
     childCamel->setParent(-1);
   }
+}
 
-  if (currCamel->getType() == "Crazy")
-    move = -1 * move;
-
-  // Show The Affected Camel By Token
-  cout << "Pyramid Token: Move [" << currCamel->getType() << "] "
-       << currCamel->getColor() << " located at {" << currCamel->getPosition()
-       << "} and ALL above camels "
-       << "by " << move << " Spaces\n";
+// This Function is used to set the links of Children and Parents of the Camel
+// Unit of CamelNum
+void Game::setUnitLinks(int camelNum, int move) {
+  Camel *currCamel = this->getCamel(camelNum);
+  int currPos, parent;
+  Tile *currTile;
 
   // Set new Position using Move and isMoved status of currCamel.
   currCamel->setIsMoved(true);
@@ -209,6 +299,7 @@ void Game::setToken() {
   }
 
   parent = currCamel->getParent();
+
   while (parent != -1) {
     currCamel = this->getCamel(parent);
 
@@ -217,18 +308,5 @@ void Game::setToken() {
     currCamel->addPosition(move);
 
     parent = currCamel->getParent();
-  }
-
-  if (currCamel->getPosition() > 14) {
-    this->setWinnerNum(camelNum);
-    this->displayBoard();
-    cout << "------------------------------------------------------------------"
-            "----\n";
-    cout << "|\t\t\t\t\tWINNER: [" << currCamel->getType() << "] "
-         << currCamel->getColor() << " located at {" << currCamel->getPosition()
-         << "}            |\n";
-    cout << "------------------------------------------------------------------"
-            "----\n";
-    exit(0);
   }
 }

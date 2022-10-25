@@ -45,4 +45,8 @@ public:
     cout << "------------------------------------------------------------------"
             "----\n";
   }
+
+  static void spaceMessage() {
+    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+  }
 };

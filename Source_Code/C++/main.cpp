@@ -24,7 +24,7 @@ int main() {
     turn = 1;
     while (turn <= 5) {
       c = newGame.getAction();
-	  cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+	  Message::spaceMessage();
       switch (c) {
       case 'A':
         cout << "Action under development\n";
